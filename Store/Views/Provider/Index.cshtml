@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Store.Models.Provider>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            Providers List
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Provider" asp-action="Create" class="btn btn-outline-primary"> <i class="bi bi-plus-circle"></i> New Provider</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-primary table-bordered table-striped">
+    <thead>
+        <tr>
+            <th> 
+                <span>
+                    <a asp-controller="Provider" asp-action="Index" asp-route-filter= "up"><i class="bi bi-caret-up-fill"></i></a> 
+                    <a asp-controller="Provider" asp-action="Index" asp-route-filter= "down"><i class="bi bi-caret-down-fill"></i></a>
+                </span> Name 
+            </th>
+            <th> Description </th>
+            <th> Categories </th>
+            <th> Products </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProviderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProviderDescription)
+            </td>
+            <td>
+                @foreach (var cat in item.Provider_Category)
+                {
+                        @Html.DisplayFor(modelItem => cat.Category.Name)
+                }
+            </td>
+            <td>
+                @if( item.Products != null) {
+                @foreach (var product in item.Products)
+                    {
+                        @Html.DisplayFor(modelItem => product.ProductTitle)
+                    } 
+                }
+                      
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                    <i class="bi bi-box-arrow-up-right"></i> Details
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                    <i class="bi bi-trash-fill"></i> Delete
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

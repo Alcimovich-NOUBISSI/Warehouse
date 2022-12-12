@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            Products List
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-outline-primary"> <i class="bi bi-plus-circle"></i> New Product</a>
+        </div>
+    </div>
+</div>
+<table class="table table-primary table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                <span>
+                    <a asp-controller="Product" asp-action="Index" asp-route-filter= "up"><i class="bi bi-caret-up-fill"></i></a> 
+                    <a asp-controller="Product" asp-action="Index" asp-route-filter= "down"><i class="bi bi-caret-down-fill"></i></a>
+                </span> Title
+            </th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+                <tr>
+                    <td>@product.ProductTitle</td>
+                    <td>@product.ProductDescription</td>
+                    <td>@product.ProductPrice</td>
+                    <td>@product.Category.Name</td>
+                    <td>
+                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-outline-primary"> 
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-outline-primary"> 
+                            <i class="bi bi-trash-fill"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

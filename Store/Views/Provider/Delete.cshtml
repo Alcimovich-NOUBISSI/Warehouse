@@ -1,0 +1,36 @@
+﻿@model Store.Models.Provider
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete provider</h2>
+
+<form method="post">
+  <fieldset>
+    <div class="form-group">
+      <label asp-for="ProviderName" class="form-label mt-4"></label>
+      <input asp-for="ProviderName" type="text" class="form-control" aria-describedby="emailHelp" disabled>
+    </div>
+    <div class="form-group mb-5">
+      <label asp-for="ProviderDescription" class="form-label mt-4"></label>
+      <input asp-for="ProviderDescription" type="text" class="form-control" aria-describedby="emailHelp" disabled>
+    </div>
+    <div class="form-group mb-5">
+        <p>Categories</p>
+      <div>
+          @if (Model.Provider_Category != null)
+          {
+              foreach (var provider in Model.Provider_Category)
+              {
+                  <span>provider.Category.Name</span>
+              }
+          } else {
+              <span>No Categories</span>
+          }
+      </div>
+    </div>
+    <button type="submit" class="btn btn-warning">Delete</button>
+    <a asp-controller="Category" asp-action="Index" class="btn btn-primary">Back To List</a>
+  </fieldset>
+</form>

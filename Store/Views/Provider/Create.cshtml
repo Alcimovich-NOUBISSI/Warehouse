@@ -1,0 +1,55 @@
+﻿@model Store.Models.Provider
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Add a provider</h2>
+
+<form method="post">
+  <fieldset>
+    <div class="form-group">
+      <label asp-for="ProviderName" class="form-label mt-4"></label>
+      <input asp-for="ProviderName" type="text" class="form-control" aria-describedby="emailHelp">
+      <span asp-validation-for="ProviderName" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+      <label asp-for="ProviderDescription" class="form-label mt-4"></label>
+      <input asp-for="ProviderDescription" type="text" class="form-control" aria-describedby="emailHelp">
+      <span asp-validation-for="ProviderDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+      <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                    List<Store.Models.DataViewModels.ProvidersCategories> categories = ViewBag.Categories;
+
+                                    foreach (var category in categories)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                        @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                                   name="selectedCategories"
+                                               value="@category.CategoryId"
+                                               @(Html.Raw(category.Enabled ? "checked=\"checked\"" : "")) />
+                                               @category.Name
+                                    @:</td>
+                                }
+                                @:</tr>
+                            }
+                    </table>
+    </div>
+    <button type="submit" class="btn btn-warning" asp-controller="Provider" asp-action="Create">Create</button>
+    <a asp-controller="Provider" asp-action="Index" class="btn btn-primary">Back To List</a>
+  </fieldset>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml"/>
+    }
+}

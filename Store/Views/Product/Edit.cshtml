@@ -1,0 +1,53 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Add a product</h2>
+
+<form method="post">
+  <fieldset>
+    <div class="form-group">
+      <label asp-for="ProductTitle" class="form-label mt-4"></label>
+      <input asp-for="ProductTitle" type="text" class="form-control" aria-describedby="emailHelp">
+      <span asp-validation-for="ProductTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+      <label asp-for="ProductDescription" class="form-label mt-4"></label>
+      <input asp-for="ProductDescription" type="text" class="form-control" aria-describedby="emailHelp">
+      <span asp-validation-for="ProductDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+      <label asp-for="ProductCount" class="form-label mt-4"></label>
+      <input asp-for="ProductCount" type="text" class="form-control" aria-describedby="emailHelp">
+      <span asp-validation-for="ProductCount" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+      <label asp-for="ProductPrice" class="form-label mt-4"></label>
+      <input asp-for="ProductPrice" type="text" class="form-control" aria-describedby="emailHelp">
+      <span asp-validation-for="ProductPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-5">
+        <select class="nav-item dropdown" asp-for="CategoryId" asp-items="ViewBag.Categories">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Category</a>        
+            <option disabled selected hidden>--Select a Category--</option>
+        </select>
+    </div>
+    <div class="form-group mb-5">
+        <select class="nav-item dropdown" asp-for="ProviderId" asp-items="ViewBag.Providers">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Category</a>        
+            <option disabled selected hidden>--Select a Provider--</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-warning" asp-controller="Product" asp-action="Edit">Update</button>
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Back To List</a>
+  </fieldset>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml"/>
+    }
+}
+
