@@ -42,7 +42,7 @@ namespace Store.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Store.Models.Product", b =>
@@ -78,7 +78,7 @@ namespace Store.Migrations
 
                     b.HasIndex("ProviderId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Store.Models.Provider", b =>
@@ -99,7 +99,7 @@ namespace Store.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Providers");
+                    b.ToTable("Providers", (string)null);
                 });
 
             modelBuilder.Entity("Store.Models.Provider_Category", b =>
@@ -114,7 +114,7 @@ namespace Store.Migrations
 
                     b.HasIndex("ProviderId");
 
-                    b.ToTable("Provider_Category");
+                    b.ToTable("Provider_Category", (string)null);
                 });
 
             modelBuilder.Entity("Store.Models.Product", b =>

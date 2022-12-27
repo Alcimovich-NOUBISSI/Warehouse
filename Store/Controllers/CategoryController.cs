@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Store.Data;
@@ -14,7 +15,6 @@ namespace Store.Controllers
         {
             _context = context; 
         }
-
         public IActionResult Index(string? filter)
         {
             IEnumerable<Category> categories = _context.Categories
@@ -30,6 +30,7 @@ namespace Store.Controllers
             return View(categories);
         }
 
+        [Authorize(Roles = "Administrator, Manager")]
         public IActionResult Create()
         {
             PopulateProvidersDropDownList();
@@ -38,6 +39,7 @@ namespace Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Manager")]
         public IActionResult Create([Bind("Name", "DisplayOrder")] Category category)
         {
             if (ModelState.IsValid)
@@ -51,6 +53,7 @@ namespace Store.Controllers
             return View();
         }
 
+        [Authorize(Policy = "RequireAdministrator")]
         public IActionResult Edit(int? id)
         {
             if (id == 0 || id == null) return NotFound();
@@ -58,6 +61,7 @@ namespace Store.Controllers
             return View(category);
         }
 
+        [Authorize(Policy = "RequireAdministrator")]
         [HttpPost]
         public IActionResult Edit(Category category)
         {
@@ -73,6 +77,7 @@ namespace Store.Controllers
             return View(category);
         }
 
+        [Authorize(Policy = "RequireAdministrator")]
         public IActionResult Delete(int? id)
         {
             if (id == 0 || id == null) return NotFound();
@@ -80,6 +85,7 @@ namespace Store.Controllers
             return View(category);
         }
 
+        [Authorize(Policy = "RequireAdministrator")]
         [HttpPost]
         public IActionResult Delete(Category category)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Store.Data;
@@ -13,6 +14,7 @@ namespace Store.Controllers
         {
             _context = context;
         }
+
         public IActionResult Index(string? filter)
         {
             IEnumerable<Product> products = _context.Products

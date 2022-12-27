@@ -1,0 +1,44 @@
+﻿@model IEnumerable<StoreUser> 
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            Users List
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Users" asp-action="Create" class="btn btn-outline-primary"> <i class="bi bi-plus-circle"></i> New Users</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-primary table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td> </td>
+                    <td>
+                        <a asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-outline-primary"> 
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-outline-primary"> 
+                            <i class="bi bi-trash-fill"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
